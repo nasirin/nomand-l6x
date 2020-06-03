@@ -35,6 +35,7 @@ Route::get('/success', 'frontend\SuccessController@index')
 // BACKEND
 Route::prefix('admin')
     ->namespace('Admin')
+    ->middleware(['auth','admin'])
     ->group(function () {
         Route::get('/', 'backend.HomeController@index')
             ->name('AdminDashboard');
@@ -43,3 +44,7 @@ Route::prefix('admin')
 Route::get('/admin', function () {
     return view('backend.pages.home');
 });
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
