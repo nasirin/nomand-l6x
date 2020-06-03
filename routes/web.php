@@ -18,33 +18,33 @@ use Illuminate\Support\Facades\Route;
 // home
 Route::get('/', 'frontend\HomeController@index')
     ->name('UserDashboard');
-
-// detail
-Route::get('/detail', 'frontend\DetailController@index')
+    
+    // detail
+    Route::get('/detail', 'frontend\DetailController@index')
     ->name('UserDetail');
-
-// checkout
-Route::get('/checkout', 'frontend\CheckoutController@index')
+    
+    // checkout
+    Route::get('/checkout', 'frontend\CheckoutController@index')
     ->name('UserCheckout');
-
-// success
-Route::get('/success', 'frontend\SuccessController@index')
+    
+    // success
+    Route::get('/success', 'frontend\SuccessController@index')
     ->name('UserSuccessCheckout');
+    
 
-
-// BACKEND
-Route::prefix('admin')
-    ->namespace('Admin')
+    // BACKEND
+    Route::prefix('admin')
+    ->namespace('backend')
     ->middleware(['auth','admin'])
     ->group(function () {
-        Route::get('/', 'backend.HomeController@index')
-            ->name('AdminDashboard');
+        Route::get('/', 'HomeController@index')
+        ->name('AdminDashboard');
     });
-
-Route::get('/admin', function () {
-    return view('backend.pages.home');
-});
-
+    
 Auth::routes();
+// Route::get('/admin', function () {
+    //     return view('backend.pages.home');
+    // });
+
 
 // Route::get('/home', 'HomeController@index')->name('home');
