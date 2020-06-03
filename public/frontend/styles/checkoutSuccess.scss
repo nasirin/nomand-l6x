@@ -1,0 +1,40 @@
+body {
+    background-color: #fff;
+    font-family: "Assistant" sans-serif;
+}
+
+// NAVBAR STYLE
+
+.navbar-brand {
+    img {
+        max-height: 40px;
+    }
+}
+
+.card {
+    border: none;
+    margin-top: 100px;
+
+    h2 {
+        font-family: Assistant;
+        font-weight: 600;
+        font-size: 26px;
+        text-align: center;
+        color: #071c4d;
+    }
+    p {
+        font-family: Assistant;
+        font-weight: 300;
+        font-size: 18px;
+        text-align: center;
+        color: #b1b1b1;
+        margin-bottom: 51px;
+    }
+
+    .btn-home{
+        background-color: #071C4D;
+        color: #fff;
+        width: 180px;
+        height: 45px;
+    }
+}

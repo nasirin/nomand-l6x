@@ -1,0 +1,208 @@
+body {
+    background-color: #fff;
+    font-family: "Assistant" sans-serif;
+}
+
+// NAVBAR STYLE
+
+.navbar-brand {
+    img {
+        max-height: 40px;
+    }
+}
+
+.btn-login {
+    background-color: #071c4d;
+    color: #fff;
+
+    &:hover {
+        background-color: #082a78;
+        color: #fff;
+    }
+}
+
+.btn-navbar-right {
+    margin-top: -10px !important;
+    margin-bottom: -8px !important;
+    margin-right: -32px !important;
+    height: 70px;
+    border-radius: 0;
+}
+
+.navbar-light {
+    .navbar-nav {
+        .nav-link {
+            color: #071c4d;
+            &.active {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// FOOTER
+.section-footer {
+    h5 {
+        font-family: Assistant;
+        font-weight: 600;
+        font-size: 22px;
+        color: #071c4d;
+    }
+    .list-unstyled {
+        a {
+            font-family: Assistant;
+            color: #071c4d;
+            font-weight: normal;
+            font-size: 18px;
+        }
+    }
+}
+
+.copyright {
+    font-family: Assistant;
+    font-weight: 300;
+    font-size: 18px;
+    text-align: center;
+    color: #6e6e6e;
+    min-height: 50px;
+}
+
+// HEADER
+
+.header-section {
+    background-color: #e4e6eb;
+    min-height: 310px;
+    margin-top: -70px;
+
+    .container {
+        padding-left: 0;
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+        padding-top: 110px;
+        padding-left: 0;
+        margin-left: 0;
+
+        .breadcrumb-item {
+            font-family: Assistant;
+            font-weight: 300;
+            font-size: 20px;
+
+            a {
+                text-decoration: none;
+                color: #071c4d;
+            }
+
+            &.active {
+                font-weight: bold;
+                color: #071c4d;
+            }
+        }
+    }
+}
+
+// CONTENT DETAIL
+.content-detail {
+    background-color: #fff;
+    margin-top: -106px;
+
+    h1 {
+        font-family: "Assistant";
+        font-weight: 600;
+        font-size: 26px;
+        color: #071c4d;
+    }
+
+    h2 {
+        font-family: Assistant;
+        font-weight: 600;
+        font-size: 20px;
+        color: #071c4d;
+    }
+
+    p {
+        font-family: Assistant;
+        font-weight: 300;
+        font-size: 18px;
+        color: #b1b1b1;
+    }
+
+    .card-footer {
+        background-color: #fff;
+        border-top: none;
+    }
+
+    .content-footer {
+        h3 {
+            font-size: 18px;
+            color: #071c4d;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: lighter;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .features-image {
+            width: 45px;
+            height: 45px;
+            float: left;
+            width: 45px;
+        }
+
+        .description {
+            margin-left: 10px;
+            // overflow: hidden;
+            float: left;
+        }
+    }
+
+    .galery {
+        .xzoom-container {
+            display: block;
+
+            .xzoom {
+                width: 100%;
+                box-shadow: none;
+                margin-bottom: 10px;
+            }
+
+            .xactive {
+                border: 4px solid #1abc9c;
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+.trip-information {
+    th {
+        font-family: Assistant;
+        font-weight: 300;
+        font-size: 18px;
+        color: #071c4d;
+        // float: right;
+    }
+    td {
+        font-family: Assistant;
+        font-weight: 300;
+        font-size: 18px;
+        color: #071c4d;
+        // float: left;
+    }
+}
+
+.card-footer {
+    background-color: #ff9e53;
+    button {
+        color: #fff;
+    }
+    &:hover {
+        background-color: #f77a1a;
+    }
+}

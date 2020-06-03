@@ -1,0 +1,189 @@
+body {
+  background-color: #fff;
+  font-family: "Assistant" sans-serif;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+}
+
+.section-footer h5 {
+  font-family: Assistant;
+  font-weight: 600;
+  font-size: 22px;
+  color: #071c4d;
+}
+
+.section-footer .list-unstyled a {
+  font-family: Assistant;
+  color: #071c4d;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.copyright {
+  font-family: Assistant;
+  font-weight: 300;
+  font-size: 18px;
+  text-align: center;
+  color: #6e6e6e;
+  min-height: 50px;
+}
+
+.header-section {
+  background-color: #e4e6eb;
+  min-height: 310px;
+  margin-top: -70px;
+}
+
+.header-section .container {
+  padding-left: 0;
+}
+
+.header-section .breadcrumb {
+  background-color: transparent;
+  padding-top: 110px;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.header-section .breadcrumb .breadcrumb-item {
+  font-family: Assistant;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.header-section .breadcrumb .breadcrumb-item a {
+  text-decoration: none;
+  color: #071c4d;
+}
+
+.header-section .breadcrumb .breadcrumb-item.active {
+  font-weight: bold;
+  color: #071c4d;
+}
+
+.content-detail {
+  background-color: #fff;
+  margin-top: -106px;
+}
+
+.content-detail h1 {
+  font-family: "Assistant";
+  font-weight: 600;
+  font-size: 26px;
+  color: #071c4d;
+}
+
+.content-detail h3 {
+  font-family: Assistant;
+  font-weight: 600;
+  font-size: 14px;
+  color: #071c4d;
+  margin-bottom: 0;
+}
+
+.content-detail h2 {
+  font-family: Assistant;
+  font-weight: 600;
+  font-size: 20px;
+  color: #071c4d;
+}
+
+.content-detail p {
+  font-family: Assistant;
+  font-weight: 300;
+  font-size: 18px;
+  color: #b1b1b1;
+}
+
+.content-detail .note {
+  margin-top: 0;
+  font-family: Assistant;
+  font-weight: 300;
+  font-size: 14px;
+  color: #b1b1b1;
+}
+
+.content-detail .btn-add-now {
+  background-color: #071c4d;
+  color: #fff;
+}
+
+.content-detail .btn-add-now:hover {
+  background-color: #103ba0;
+}
+
+.content-detail .pay-instruction {
+  font-family: Assistant;
+  font-weight: 300;
+  font-size: 14px;
+  color: #b1b1b1;
+}
+
+.content-detail .account .account-img {
+  min-height: 45px;
+  float: left;
+  margin-right: 12px;
+}
+
+.content-detail .account .desc {
+  overflow: hidden;
+  float: left;
+}
+
+.content-detail .account .desc p {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-family: Assistant;
+  font-weight: normal;
+  font-size: 16px;
+  color: #071c4d;
+}
+
+.trip-information th {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  font-family: Assistant;
+  font-weight: 300;
+  font-size: 18px;
+  color: #071c4d;
+}
+
+.trip-information td {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  font-family: "Assistant";
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: right;
+  color: #b1b1b1;
+}
+
+.trip-information td b {
+  color: #071c4d;
+}
+
+.trip-information td .unq {
+  color: #ff9e53;
+}
+
+.card-footer {
+  margin-top: 50px;
+  background-color: #ff9e53;
+}
+
+.card-footer button {
+  color: #fff;
+  text-align: center;
+}
+
+.card-footer:hover {
+  background-color: #f77a1a;
+}
+/*# sourceMappingURL=checkout.css.map */
