@@ -39,6 +39,8 @@ Route::get('/', 'frontend\HomeController@index')
     ->group(function () {
         Route::get('/', 'HomeController@index')
         ->name('AdminDashboard');
+
+        Route::resource('travel-package','TravelPackagesController');
     });
     
 Auth::routes(['verify'=>true]);
