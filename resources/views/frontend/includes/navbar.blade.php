@@ -20,14 +20,30 @@
                 </li>
                 <li class="nav-item mx-md-2"><a href="" class="nav-link">Testimonial</a></li>
 
+                @guest
                 <!-- mobile login -->
-                <form action="#" class="form-inline d-sm-block d-md-none" method="GET">
-                    <button class="btn btn-login my-2 my-sm-0 px-4">Login</button>
+                <form class="form-inline d-sm-block d-md-none">
+                    <button class="btn btn-login my-2 my-sm-0 px-4" type="button" onclick="event.preventDefault(); location.href='{{url('login')}}';">Login</button>
                 </form>
                 <!-- desktop login -->
-                <form action="" class="form-inline my-2 my-lg-0 d-none d-md-block">
-                    <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4">Login</button>
+                <form class="form-inline my-2 my-lg-0 d-none d-md-block">
+                    <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" type="button" onclick="event.preventDefault(); location.href='{{url('login')}}';">Login</button>
                 </form>
+                @endguest
+
+                @auth
+                <!-- mobile login -->
+                <form class="form-inline d-sm-block d-md-none" action="{{url('logout')}}" method="POST">
+                @csrf
+                    <button class="btn btn-login my-2 my-sm-0 px-4" type="submit">Logout</button>
+                </form>
+                <!-- desktop login -->
+                <form class="form-inline my-2 my-lg-0 d-none d-md-block" action="{{url('logout')}}" method="POST">
+                @csrf
+                    <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" type="submit">Logout</button>
+                </form>
+                @endauth
+
             </ul>
         </div>
     </nav>
