@@ -8,8 +8,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Paket Travel</h1>
-        <a href="{{route('travel-package.create')}}" class="btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-plus fa-sm text-white-50"> Tambah Paket Travel</i>
+        <a href="{{route('travel-package.create')}}" class="btn btn-md btn-primary shadow-sm">
+            <i class="fas fa-plus fa-sm text-white  "> Tambah Paket Travel</i>
         </a>
     </div>
 
@@ -24,7 +24,7 @@
                             <th>Location</th>
                             <th>Type</th>
                             <th>Departure Date</th>
-                            <th>Type</th>
+                            <th>Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                             <td>{{$data->location }}</td>
                             <td>{{$data->type }}</td>
                             <td>{{$data->departure_date }}</td>
-                            <td>{{$data->type }}</td>
+                            <td>{{$data->price }}</td>
                             <td>
                                 <a href="{{route('travel-package.edit',$data->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                 <form action="{{route('travel-package.destroy',$data->id)}}" method="POST" class="d-inline">

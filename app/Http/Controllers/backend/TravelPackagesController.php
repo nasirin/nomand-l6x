@@ -5,6 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\TravelPackages; //panggil model travel packages
+use App\Http\Requests\backend\TravelPackagesRequest; // panggil request model yang telah dibuat
+use Illuminate\Support\Str; //panggil library string
 
 class TravelPackagesController extends Controller
 {
@@ -16,7 +18,7 @@ class TravelPackagesController extends Controller
     public function index()
     {
         $items = TravelPackages::all();
-        return view('backend\pages\travel-package.index',[
+        return view('backend.pages.travel-package.index',[
             'items' => $items
         ]);
     }
@@ -28,7 +30,7 @@ class TravelPackagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.travel-package.create');
     }
 
     /**
@@ -37,9 +39,14 @@ class TravelPackagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TravelPackagesRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
+
+        TravelPackages::create($data); //something wrong!!
+
+        return redirect()->route('travel-package.index');
     }
 
     /**

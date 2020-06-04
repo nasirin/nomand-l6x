@@ -10,9 +10,7 @@ class TravelPackages extends Model
     use SoftDeletes; // 2. gunakan softdelete
 
     // 3. menambahkan field lable, yang berfungsi untuk : menyimpan secara langsung (mass assignment).
-    protected $fillabel=[
-        'title', 'slug','location','about','feature_event','language','foods','departure_date','duration','type','price'
-    ];
+    protected $fillable = ['title','slug','location','about','featured_event','language','food','departure_date','duration','type','price'];
 
     protected $hidden=[];
 }
