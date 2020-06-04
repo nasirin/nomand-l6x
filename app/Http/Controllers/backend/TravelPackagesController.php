@@ -44,7 +44,7 @@ class TravelPackagesController extends Controller
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
 
-        TravelPackages::create($data); //something wrong!!
+        TravelPackages::create($data);
 
         return redirect()->route('travel-package.index');
     }
@@ -68,7 +68,8 @@ class TravelPackagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = TravelPackages::findOrFail($id);
+        return view('backend.pages.travel-package.edit',['item'=>$item]);
     }
 
     /**
@@ -80,7 +81,13 @@ class TravelPackagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
+
+        $item = TravelPackages::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('travel-package.index');
     }
 
     /**
