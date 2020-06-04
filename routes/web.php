@@ -41,7 +41,7 @@ Route::get('/', 'frontend\HomeController@index')
         ->name('AdminDashboard');
     });
     
-Auth::routes();
+Auth::routes(['verify'=>true]);
 // Route::get('/admin', function () {
     //     return view('backend.pages.home');
     // });
