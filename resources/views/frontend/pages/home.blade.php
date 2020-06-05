@@ -9,7 +9,7 @@
         As Easy One Click</h1>
     <p class="mt-3">You will see beautiful <br>
         moment you never see before</p>
-    <a href="" class="btn btn-get-started px-4 mt-4">Get Started</a>
+    <a href="#populer" class="btn btn-get-started px-4 mt-4">Get Started</a>
 </header>
 <main>
     <!-- STATISTIC -->
@@ -50,42 +50,19 @@
     <!-- img -->
     <section class="populer-content container" id="popular-content">
         <div class="popular-travel row justify-content-center">
+
+            @foreach($item as $data)
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card-travel text-center d-flex flex-column" style="background-image: url('frontend/images/img1@2x.png');">
-                    <div class="travel-country">INDONESIA</div>
-                    <div class="travel-location">DERATAN, BALI</div>
+                <div class="card-travel text-center d-flex flex-column" style="background-image: url('{{$data->galleries->count()?Storage::url($data->galleries->first()->image) : ''}}');">
+                    <div class="travel-country">{{$data->location}}</div>
+                    <div class="travel-location">{{$data->title}}</div>
                     <div class="travel-button mt-auto">
-                        <a href="" class="btn btn-travel-detail px-4">View Details</a>
+                        <a href="{{ url('detail',$data->slug) }}" class="btn btn-travel-detail px-4">View Details</a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card-travel text-center d-flex flex-column" style="background-image: url('frontend/images/img2@2x.png');">
-                    <div class="travel-country">INDONESIA</div>
-                    <div class="travel-location">BROMO, MALANG</div>
-                    <div class="travel-button mt-auto">
-                        <a href="" class="btn btn-travel-detail px-4">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card-travel text-center d-flex flex-column" style="background-image: url('frontend/images/img3@2x.png');">
-                    <div class="travel-country">INDONESIA</div>
-                    <div class="travel-location">NUSA PENIDA</div>
-                    <div class="travel-button mt-auto">
-                        <a href="details.html" class="btn btn-travel-detail px-4">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card-travel text-center d-flex flex-column" style="background-image: url('frontend/images/img4@2x.png');">
-                    <div class="travel-country">MIDDLE EAST</div>
-                    <div class="travel-location">DUBAI</div>
-                    <div class="travel-button mt-auto">
-                        <a href="" class="btn btn-travel-detail px-4">View Details</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </section>
 
@@ -181,7 +158,7 @@
                     <a href="" class="btn btn-need-help px-4 mx-1">
                         I Need Help
                     </a>
-                    <a href="" class="btn btn-get-sarted px-4 mx-1">
+                    <a href="{{route('register')}}" class="btn btn-get-sarted px-4 mx-1">
                         Get Started
                     </a>
                 </div>

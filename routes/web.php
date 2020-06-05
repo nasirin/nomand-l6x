@@ -18,34 +18,34 @@ use Illuminate\Support\Facades\Route;
 // home
 Route::get('/', 'frontend\HomeController@index')
     ->name('UserDashboard');
-    
-    // detail
-    Route::get('/detail', 'frontend\DetailController@index')
-    ->name('UserDetail');
-    
-    // checkout
-    Route::get('/checkout', 'frontend\CheckoutController@index')
-    ->name('UserCheckout');
-    
-    // success
-    Route::get('/success', 'frontend\SuccessController@index')
-    ->name('UserSuccessCheckout');
-    
 
-    // BACKEND
-    Route::prefix('admin')
+// detail
+Route::get('/detail/{slug}', 'frontend\DetailController@index')
+    ->name('UserDetail');
+
+// checkout
+Route::get('/checkout', 'frontend\CheckoutController@index')
+    ->name('UserCheckout');
+
+// success
+Route::get('/success', 'frontend\SuccessController@index')
+    ->name('UserSuccessCheckout');
+
+
+// BACKEND
+Route::prefix('admin')
     ->namespace('backend')
-    ->middleware(['auth','admin'])
+    ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::get('/', 'HomeController@index')
-        ->name('AdminDashboard');
+            ->name('AdminDashboard');
 
-        Route::resource('travel-package','TravelPackagesController');
-        Route::resource('gallery','GalleryController');
-        Route::resource('transaction','TransactionController');
+        Route::resource('travel-package', 'TravelPackagesController');
+        Route::resource('gallery', 'GalleryController');
+        Route::resource('transaction', 'TransactionController');
     });
-    
-Auth::routes(['verify'=>true]);
+
+Auth::routes(['verify' => true]);
 // Route::get('/admin', function () {
     //     return view('backend.pages.home');
     // });
