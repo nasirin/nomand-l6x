@@ -73,7 +73,7 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { 
         $item = Transaction::findOrFail($id);
         return view('backend.pages.transaction.edit',['item'=>$item]);
     }
@@ -85,10 +85,9 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TransactionRequest $request, $id)
     {
         $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
 
         $item = Transaction::findOrFail($id);
         $item->update($data);
