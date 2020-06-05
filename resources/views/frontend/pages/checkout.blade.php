@@ -1,7 +1,7 @@
 @extends('frontend.layout.checkout')
 @section('title','NOMAND - CheckOut')
 
-@section('content')
+@section('content') 
 
 <header class="header-section">
     <div class="container">
