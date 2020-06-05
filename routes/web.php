@@ -24,8 +24,25 @@ Route::get('/detail/{slug}', 'frontend\DetailController@index')
     ->name('UserDetail');
 
 // checkout
-Route::get('/checkout', 'frontend\CheckoutController@index')
-    ->name('UserCheckout');
+Route::post('/checkout/{id}', 'frontend\CheckoutController@process')
+    ->name('checkout-proses')
+    ->middleware(['auth','verified']);
+
+Route::get('/checkout/{id}', 'frontend\CheckoutController@index')
+    ->name('checkout')
+    ->middleware(['auth','verified']);
+
+Route::post('/checkout/create/{detail_id}', 'frontend\CheckoutController@create')
+    ->name('checkout-create')
+    ->middleware(['auth','verified']);
+
+Route::get('/checkout/remove/{detail_id}', 'frontend\CheckoutController@remove')
+    ->name('checkout-remove')
+    ->middleware(['auth','verified']);
+
+Route::get('/checkout/confirm/{id}', 'frontend\CheckoutController@success')
+    ->name('checkout-success')
+    ->middleware(['auth','verified']);
 
 // success
 Route::get('/success', 'frontend\SuccessController@index')
