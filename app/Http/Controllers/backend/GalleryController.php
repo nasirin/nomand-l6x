@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Gallery; //panggil model travel packages
+use App\TravelPackages; 
 use App\Http\Requests\backend\GalleryRequest; // panggil request model yang telah dibuat
 use Illuminate\Support\Str; //panggil library string
 
@@ -30,7 +31,10 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.gallery.create');
+        $travel_package = TravelPackages::all();
+        return view('backend.pages.gallery.create',[
+            'travel_packages' => $travel_package
+        ]);
     }
 
     /**
@@ -42,7 +46,9 @@ class GalleryController extends Controller
     public function store(GalleryRequest $request)
     {
         $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
+        $data['image'] = $request->file('image')->store(
+            'assets/gallery', 'public'
+        ) ;
 
         Gallery::create($data);
 

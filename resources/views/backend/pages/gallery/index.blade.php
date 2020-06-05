@@ -31,7 +31,7 @@
                             <td>{{$data->id}}</td>
                             <td>{{$data->travel_package->title }}</td>
                             <td>
-                                <img src="{{Storage::url($items->image)}}" alt="Travel Images" width="150px" class="img-thumbnail">
+                                <img src="{{Storage::url($data->image)}}" alt="Travel Images" width="150px" class="img-thumbnail">
                             </td>                    
                             <td>
                                 <a href="{{route('gallery.edit',$data->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
