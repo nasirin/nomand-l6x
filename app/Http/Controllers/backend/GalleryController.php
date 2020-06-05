@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Gallery; //panggil model travel packages
-use App\TravelPackages; 
+use App\TravelPackages;
 use App\Http\Requests\backend\GalleryRequest; // panggil request model yang telah dibuat
 use Illuminate\Support\Str; //panggil library string
 
@@ -19,7 +19,7 @@ class GalleryController extends Controller
     public function index()
     {
         $items = Gallery::with(['travel_package'])->get();
-        return view('backend.pages.gallery.index',[
+        return view('backend.pages.gallery.index', [
             'items' => $items
         ]);
     }
@@ -32,7 +32,7 @@ class GalleryController extends Controller
     public function create()
     {
         $travel_package = TravelPackages::all();
-        return view('backend.pages.gallery.create',[
+        return view('backend.pages.gallery.create', [
             'travel_packages' => $travel_package
         ]);
     }
@@ -47,8 +47,9 @@ class GalleryController extends Controller
     {
         $data = $request->all();
         $data['image'] = $request->file('image')->store(
-            'assets/gallery', 'public'
-        ) ;
+            'assets/gallery',
+            'public'
+        );
 
         Gallery::create($data);
 
@@ -75,7 +76,12 @@ class GalleryController extends Controller
     public function edit($id)
     {
         $item = Gallery::findOrFail($id);
-        return view('backend.pages.gallery.edit',['item'=>$item]);
+        $travel_package = TravelPackages::all();
+
+        return view('backend.pages.gallery.edit', [
+            'item' => $item,
+            'travel_package' => $travel_package
+        ]);
     }
 
     /**
@@ -88,7 +94,9 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
+        $data['image'] = $request->file('image')->store(
+            'assets/gallery', 'public'
+        );
 
         $item = Gallery::findOrFail($id);
         $item->update($data);
