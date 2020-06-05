@@ -42,6 +42,7 @@ Route::get('/', 'frontend\HomeController@index')
 
         Route::resource('travel-package','TravelPackagesController');
         Route::resource('gallery','GalleryController');
+        Route::resource('transaction','TransactionController');
     });
     
 Auth::routes(['verify'=>true]);

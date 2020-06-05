@@ -17,14 +17,16 @@ class Transaction extends Model
     // membuat relasi table
     public function details()
     {
-        return $this->hasMany(TransactioDetail::class, 'transaction_id','id');
+        return $this->hasMany(TransactionDetail::class, 'transaction_id','id');
     }
+
     public function travel_package()
     {
         return $this->belongsTo(TravelPackages::class, 'travel_packages_id','id');
     }
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id','id');
+        return $this->belongsTo(User::class, 'users_id','id');
     }
 }
