@@ -26,25 +26,60 @@ class CheckoutController extends Controller
 
     public function process(Request $request, $id)
     {
+        // koding ini memasukan data ke dalam transaksi
+
         $travel_package = TravelPackages::findOrFail($id);
 
-        $transaction = Transaction::created([
+        // koding insert transaksi
+        $transaction = Transaction::create([
             'travel_packages_id' => $id,
-            'user_id' => Auth::user()->id,
+            'users_id' => Auth::user()->id, // mengambil id user yang sedang login
             'additional_visa' => 0,
             'transaction_total' => $travel_package->price,
-            'transaction_price' => 'IN_CART'
+            'transaction_status' => 'IN_CART'
         ]);
 
-        TransactionDetail::created([
+        TransactionDetail::create([
             'transaction_id' => $transaction->id,
             'username' => Auth::user()->username,
             'nationality' => 'ID',
             'is_visa' => false,
-            'doe_passport' => Carbon::now()->addYear(5)
+            'due_passport' => Carbon::now()->addYears(5)
         ]);
 
         return redirect()->route('checkout', $transaction->id);
+    }
+
+    public function create(Request $request, $id)
+    {
+        // membuat validasi form
+        $request->validate([
+            'username' => 'required|string|exists:users,username',
+            'nationality' =>'required',
+            'is_visa' => 'required|boolean',
+            'due_passport' => 'required'
+        ]);
+
+        // mengatur data yang akan di insert
+        $data = $request->all();
+        $data['transaction_id'] = $id;
+
+        // insrt data
+        TransactionDetail::create($data);
+
+        // mengambil data transaksi
+        $transaction = Transaction::with(['travel_package'])->find($id);
+
+        // update data
+        if ($request->is_visa) {
+            $transaction->transaction_total += 190;
+            $transaction->additional_visa += 190;
+        }
+
+        $transaction->transaction_total += $transaction->travel_package->price;
+        $transaction->save();
+
+        return redirect()->route('checkout', $id);
     }
 
     public function remove(Request $request, $detail_id)
@@ -64,36 +99,6 @@ class CheckoutController extends Controller
         $item->delete();
 
         return redirect()->route('checkout',$item->transaction_id);
-    }
-
-    public function create(Request $request, $id)
-    {
-        // membuat validasi form
-        $request->validate([
-            'username' => 'required|string|exists:users,username',
-            'is_visa' => 'required|boolean',
-            'doe_passport' => 'required'
-        ]);
-
-        $data = $request->all();
-        $data['transaction_id'] = $id;
-
-        // insrt data
-        TransactionDetail::created($data);
-
-        // mengambil data transaksi
-        $transaction = Transaction::with(['travel_package'])->find($id);
-
-        // update data
-        if ($request->is_visa) {
-            $transaction->transaction_total += 190;
-            $transaction->additional_visa += 190;
-        }
-
-        $transaction->transaction_total += $transaction->travel_package->price;
-        $transaction->save();
-
-        return redirect()->route('checkout', $id);
     }
 
     public function success(Request $request, $id)

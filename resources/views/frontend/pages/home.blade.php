@@ -53,7 +53,7 @@
 
             @foreach($item as $data)
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card-travel text-center d-flex flex-column" style="background-image: url('{{$data->galleries->count()?Storage::url($data->galleries->first()->image) : ''}}');">
+                <div class="card-travel text-center d-flex flex-column" style="background-image: url('{{$data->galleries->count() ? Storage::url($data->galleries->first()->image) : ''}}');">
                     <div class="travel-country">{{$data->location}}</div>
                     <div class="travel-location">{{$data->title}}</div>
                     <div class="travel-button mt-auto">

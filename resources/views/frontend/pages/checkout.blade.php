@@ -1,13 +1,13 @@
 @extends('frontend.layout.checkout')
 @section('title','NOMAND - CheckOut')
 
-@section('content') 
+@section('content')
 
 <header class="header-section">
     <div class="container">
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"> <a href="index.html">Paket Travel</a> </li>
+                <li class="breadcrumb-item"> <a href="{{url('/')}}">Paket Travel</a> </li>
                 <li class="breadcrumb-item"> Details</li>
                 <li class="breadcrumb-item active"> Checkout</li>
             </ol>
@@ -21,9 +21,18 @@
         <div class="row">
             <div class="col-lg-8 pl-lg-0">
                 <div class="card content-detail">
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <div class="card-body">
                         <h1>Who is Going?</h1>
-                        <p>Trip to Ubud, Bali, Indonesia</p>
+                        <p>Trip to {{$item->travel_package->title }}, {{$item->travel_package->location }}</p>
 
                         <div class="attendee">
                             <table class="table table-responsive-sm text-center table-borderless">
@@ -36,56 +45,53 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
+                                    @forelse($item->details as $detail)
                                     <tr>
-                                        <td><img src="{{url('frontend/images/members/Mask Group 7@2x.png')}}" height="60" alt=""></td>
-                                        <td class="align-middle">Galih Pratama</td>
-                                        <td class="align-middle">SG</td>
-                                        <td class="align-middle">30 Days</td>
-                                        <td class="align-middle">Active</td>
-                                        <td class="align-middle"><a href="" class="btn btn-sm"> X </a></td>
+                                        <td><img src="https://ui-avatars.com/api/?name={{$detail->username}}" height="60" alt="Avatar" class="rounded-circle"></td>
+                                        <td class="align-middle">{{$detail->username}}</td>
+                                        <td class="align-middle">{{$detail->nationality}}</td>
+                                        <td class="align-middle">{{$detail->is_visa ? '30 Days' : 'N/A'}}</td>
+                                        <td class="align-middle">{{\Carbon\Carbon::createFromDate($detail->due_passport) > \Carbon\Carbon::now() ? 'Active' : 'In Active'}}</td>
+                                        <td class="align-middle">
+                                            <a href="{{route('checkout_remove',$detail->id)}}" class="btn btn-sm"> X </a>
+                                        </td>
                                     </tr>
+                                    @empty
                                     <tr>
-                                        <td><img src="{{url('frontend/images/members/Mask Group 8@2x.png')}}" height="60" alt=""></td>
-                                        <td class="align-middle">Angga Risky</td>
-                                        <td class="align-middle">CN</td>
-                                        <td class="align-middle">N/A</td>
-                                        <td class="align-middle">Active</td>
-                                        <td class="align-middle"><a href="" class="btn btn-sm"> X </a></td>
+                                        <td colspan="6" class="text-center"> No Visitor</td>
                                     </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
 
                         <div class="form-member">
                             <h2>Add Member</h2>
-                            <form action="" class="form-inline">
+                            <form action="{{route('checkout_create',$item->id)}}" class="form-inline" method="POST">
+                                @csrf
+                                <!-- username -->
                                 <label for="username" class="sr-only">Name</label>
-                                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Username" name="username" id="username">
+                                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Username" name="username" id="username" required>
 
-                                <label for="Visa" class="sr-only">Visa anda</label>
-                                <select name="visa" id="Visa" class="custom-select mb-2 mr-sm-2 ">
-                                    <option value="visa">Visa</option>
-                                    <option value="30day">30 Days</option>
-                                    <option value="N/A">N/A</option>
+                                <!-- nationality -->
+                                <label for="nationality" class="sr-only">Nationality</label>
+                                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Nationality" style="width:50px" name="nationality" id="nationality" required>
+
+                                <!-- visa -->
+                                <label for="Visa" class="sr-only">Visa</label>
+                                <select name="is_visa" id="Visa" class="custom-select mb-2 mr-sm-2 " required>
+                                    <option value="">--Visa--</option>
+                                    <option value="1">30 Days</option>
+                                    <option value="0">N/A</option>
                                 </select>
 
-
+                                <!-- passport -->
                                 <label for="passport" class="sr-only">DUE Passport</label>
                                 <div class="input-goup mb-2 mr-sm-2">
-                                    <input type="text" name="date" id="date" class="from-control input" placeholder="DUE Passport">
+                                    <input type="text" name="due_passport" id="passport" class="from-control input" placeholder="DUE Passport" style="width: 110px;" required>
                                 </div>
 
                                 <button class="btn btn-add-now mb-2 px-4" type="submit"> Add Now</button>
-                                <!-- <div class="form-group">
-                                        <input type="text" placeholder="Username" name="username">
-                                        <select name="" id="">
-                                            <option value="">VISA</option>
-                                            <option value="">visa 1</option>
-                                            <option value="">visa 2</option>
-                                        </select>
-                                        <input type="date" placeholder="DOE Passwport">
-                                        <button type="submit" class="btn btn-addnow">Add Now</button>
-                                    </div> -->
                             </form>
 
                         </div>
@@ -105,23 +111,24 @@
                             <table class="trip-information table table-responsive-sm table-borderless">
                                 <tr>
                                     <th>Members</th>
-                                    <td>2 person</td>
+                                    <td>{{$item->details->count()}} person</td>
                                 </tr>
                                 <tr>
                                     <th>Additional VISA</th>
-                                    <td>$ 190,00</td>
+                                    <td>$ {{$item->additional_visa}},00</td>
                                 </tr>
                                 <tr>
                                     <th>Trip Price </th>
-                                    <td>$80,00/person</td>
+                                    <td>${{$item->travel_package->price}},00/person</td>
                                 </tr>
                                 <tr>
                                     <th>Sub Total</th>
-                                    <td>$ 280,00</td>
+                                    <td>$ {{$item->transaction_total}},00</td>
                                 </tr>
                                 <tr>
                                     <th>Total (+Unique Code)</th>
-                                    <td><b>$279,<span class="unq">33</span></b> </td>
+                                    <td><b>${{$item->transaction_total}},<span class="unq">{{mt_rand(0,99)}}</span></b> </td>
+                                    <!-- mt_rand() berfungsi untuk merandom string -->
                                 </tr>
                             </table>
                             <hr>
@@ -146,8 +153,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button class="btn btn-block btn-join" type="submit">I Have Made Payment</button>
+                    <div class="card-footer bg-info mb-0 pb-0">
+                        <a class="btn btn-block btn-join" href="{{route('checkout_success',$item->id)}}">I Have Made Payment</a>
+                        <!-- <a class="btn btn-block btn-join" href="{{route('checkout_remove',$item->travel_package->slug)}}">Cancel Booking</a> -->
+                    </div>
+                    <div class="card-footer bg-danger mt-0 pt-0">
+                        <!-- <a class="btn btn-block btn-join" href="{{route('checkout_success',$item->id)}}">I Have Made Payment</a> -->
+                        <a class="btn btn-block btn-join" href="{{route('checkout_remove',$item->travel_package->slug)}}">Cancel Booking</a>
                     </div>
                 </div>
             </div>
@@ -167,6 +179,7 @@
 <script>
     $(document).ready(function() {
         $('.input').datepicker({
+            format: 'yyyy-mm-dd',
             uiLibrary: 'bootstrap4',
             icons: {
                 rightIcon: `<img src="{{url('frontend/images/ic_doe@2x.png')  }}"/>`
