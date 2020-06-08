@@ -37,6 +37,9 @@ Route::get('/checkout/confirm/{id}', 'frontend\CheckoutController@success')
 // Route::get('/success', 'frontend\SuccessController@index')
 //     ->name('UserSuccessCheckout');
 
+// LOGIN
+Route::get('/loginuser', 'frontend\LoginController@index')
+    ->name('LoginUser');
 
 // BACKEND
 Route::prefix('admin')

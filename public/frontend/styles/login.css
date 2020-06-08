@@ -1,0 +1,46 @@
+@media (min-width: 992px) {
+  .login-container {
+    background: -webkit-gradient(linear, left top, right top, color-stop(60%, #fff), color-stop(40%, #e4e6eb));
+    background: linear-gradient(90deg, #fff 60%, #e4e6eb 40%);
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.pages-login {
+  height: 100vh;
+}
+
+.pages-login .btn-login {
+  font-family: Assistant;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.pages-login label {
+  font-family: Assistant;
+  font-weight: 300;
+  font-size: 18px;
+  text-align: left;
+  color: #071c4d;
+}
+
+.pages-login .section-left h1 {
+  font-family: "Playfair Display";
+  font-weight: bold;
+  font-size: 50px;
+  text-align: left;
+  color: #071c4d;
+}
+
+.pages-login .section-right a {
+  font-family: Assistant;
+  font-weight: 300;
+  text-decoration: underline;
+  font-size: 16px;
+  text-align: center;
+  color: #bfbfbf;
+}
+/*# sourceMappingURL=login.css.map */
