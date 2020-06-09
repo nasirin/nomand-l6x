@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use App\Transaction;
 use App\TransactionDetail;
 use App\TravelPackages;
+use Illuminate\Support\Facades\Mail;
+// use Mail; // load library mailable laravel
+use App\Mail\Ticket;
 
 // library bawaan laravel untuk format tanggal
 use Carbon\Carbon;
@@ -55,7 +58,7 @@ class CheckoutController extends Controller
         // membuat validasi form
         $request->validate([
             'username' => 'required|string|exists:users,username',
-            'nationality' =>'required',
+            'nationality' => 'required',
             'is_visa' => 'required|boolean',
             'due_passport' => 'required'
         ]);
@@ -98,14 +101,20 @@ class CheckoutController extends Controller
 
         $item->delete();
 
-        return redirect()->route('checkout',$item->transaction_id);
+        return redirect()->route('checkout', $item->transaction_id);
     }
 
     public function success(Request $request, $id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $transaction = Transaction::with(['details', 'travel_package.galleries', 'user'])->findOrFail($id);
+
         $transaction->transaction_status = "PENDING";
         $transaction->save();
+
+        // kirim ticket ke user
+        Mail::to($transaction->user)->send(
+            new Ticket($transaction)
+        );
 
         return view('frontend.pages.success');
     }
