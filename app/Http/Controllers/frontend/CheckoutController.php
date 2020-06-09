@@ -111,6 +111,9 @@ class CheckoutController extends Controller
         $transaction->transaction_status = "PENDING";
         $transaction->save();
 
+        // cek data transaksi eticket
+        // return $transaction;
+
         // kirim ticket ke user
         Mail::to($transaction->user)->send(
             new Ticket($transaction)
