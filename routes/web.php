@@ -44,7 +44,7 @@ Route::get('/loginuser', 'frontend\LoginController@index')
 // BACKEND
 Route::prefix('admin')
     ->namespace('backend')
-    ->middleware(['auth', 'admin'])
+    // ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::get('/', 'HomeController@index')
             ->name('AdminDashboard');
@@ -61,3 +61,7 @@ Auth::routes(['verify' => true]);
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
